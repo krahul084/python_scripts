@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import getpass,sys,os, subprocess
+import getpass,sys,os, subprocess,hashlib
 
 #Loading Existing Data for validating input
 def load_data():
@@ -113,6 +113,7 @@ if __name__ == '__main__':
 	uid = map(int,check_uid)
 	uid = max(uid) + 1
         gid = int(gid)
+        password=hashlib.md5(password).hexdigest()
 	home_perm = '-nosuid,rw'
 	home_filer = 'vnx_01:/%s/home/&' % filer
         #Actual Implementation 
