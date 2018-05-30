@@ -113,7 +113,7 @@ if __name__ == '__main__':
 	uid = map(int,check_uid)
 	uid = max(uid) + 1
         gid = int(gid)
-        password=hashlib.md5(password).hexdigest()
+        password=hashlib.md5(password.encode('utf-8')).hexdigest()
 	home_perm = '-nosuid,rw'
 	home_filer = 'vnx_01:/%s/home/&' % filer
         #Actual Implementation 
