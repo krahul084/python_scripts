@@ -37,6 +37,9 @@ def main():
     for item in output_list:
         print item
     print "Total number of items found: %s" % len(output_list)
-main()
+
+#Execution Starts Here
+if __name__ == '__main__':
+    main()
 
          
