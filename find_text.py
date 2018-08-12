@@ -12,11 +12,12 @@ def get_absFilePath(path):
 
 
 def find_string(path,pass_pattern):
-	for file in get_absFilePath(path):
-	    for string in pass_pattern:
-	        with open(file,'r') as file_content:
-		    if string in file_content.read():
-		        yield string+"-"+file
+    for file in get_absFilePath(path):
+        if os.path.isfile(fname):
+            for string in pass_pattern:
+                with open(file,'r') as file_content:
+                    if string in file_content.read():
+                        yield string+"-"+file
 
 
 def main():
