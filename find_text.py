@@ -8,7 +8,7 @@ path = raw_input("Enter the path to search: ")
 input_file = raw_input("Enter the input file absolute path: ")
 
 #Storing the search strings as set variable
-pass_pattern = set([i.strip().split() for i in open(input_file).readlines()][0])
+pass_pattern = set([line.strip().split() for line in open(input_file).readlines()][0])
 
 #Function to capture the absolute paths of all files in the path
 def get_absFilePath(path):
