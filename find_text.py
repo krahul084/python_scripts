@@ -1,14 +1,19 @@
 #!/usr/bin/env python
-#Script to display files matching the strings supplied as input from a text file containing strings delimited by space
-#Importing the OS Module 
+#Importing the OS Module
 import os
+import argparse
+
+parser = argparse.ArgumentParser(description='Identify files with input strings')
+parser.add_argument('-d', '--dir', type=str, metavar='', required=True, help='Absolute Path of Directory to Search')
+parser.add_argument('-if','--input_file', type=str, metavar='', required=True, help='Absolute Path of Input File')
+args = parser.parse_args()
 
 #Getting the path and input file as user input recommended to input absolute paths
-path = raw_input("Enter the path to search: ")
-input_file = raw_input("Enter the input file absolute path: ")
+path = args.dir
+input_file = args.input_file
 
 #Storing the search strings as set variable
-pass_pattern = set([line.strip().split() for line in open(input_file).readlines()][0])
+pass_pattern = set([i.strip().split() for i in open(input_file).readlines()][0])
 
 #Function to capture the absolute paths of all files in the path
 def get_absFilePath(path):
@@ -22,8 +27,9 @@ def find_string(path,pass_pattern):
         if os.path.isfile(file):
             for string in pass_pattern:
                 with open(file,'r') as file_content:
-                    if string in file_content.read():
-                        yield string+" - "+file
+                        for num,line in enumerate(file_content,1):
+                            if string in line:
+                                yield string+" - "+file+":"+str(num)
 
 #Main Function to print the files with the total identified items
 def main():
@@ -32,4 +38,5 @@ def main():
         print item
     print "Total number of items found: %s" % len(output_list)
 main()
+
          
