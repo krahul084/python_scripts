@@ -13,7 +13,7 @@ path = args.dir
 input_file = args.input_file
 
 #Storing the search strings as set variable
-pass_pattern = set([i.strip().split() for i in open(input_file).readlines()][0])
+pass_pattern = set([line.strip().split() for line in open(input_file).readlines()][0])
 
 #Function to capture the absolute paths of all files in the path
 def get_absFilePath(path):
