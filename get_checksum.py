@@ -78,7 +78,7 @@ EXAMPLES = '''
 # Generate checksum value of directory excluding certain extensions
 - get_checksum:
       path: path/to/directory
-      excluded_extension: 
+      exclude_extensions: 
           - py
           - git
   register: checksum
