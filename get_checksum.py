@@ -4,7 +4,11 @@ DOCUMENTATION = '''
 ---
 module: get_checksum
 
-short_description: Generate a checksum for a directory/file
+short_description: 
+   - Generate a checksum for a directory/file
+   - References:
+        Took some source code from https://pypi.org/project/checksumdir and converted into ansible module
+        
 
 version_added: "2.6"
 
