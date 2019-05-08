@@ -121,6 +121,7 @@ import re
 import stat
 import time
 import shutil
+import fnmatch
 
 from ansible.module_utils.basic import AnsibleModule
 
@@ -132,8 +133,7 @@ def list_files(path_pattern):
 def filter_with_excludes(filelist,excludes):
     '''filter files excluding some based on pattern'''
     for pattern in excludes:
-        pattern_regex = re.compile(pattern)
-        excluded_files = [file for file in filelist if re.match(pattern_regex,os.path.basename(file))]
+        excluded_files = [file for file in filelist if fnmatch.fnmatch(os.path.basename(file), pattern)]
         filelist = list(set(filelist) - set(excluded_files))
     return filelist
 
@@ -203,7 +203,9 @@ def statinfo(st):
     
 def delete_files(filelist):
     for file in filelist:
-        if os.path.isdir(file):
+        if os.path.islink(file):
+            os.unlink(file)
+        elif os.path.isdir(file):
             shutil.rmtree(file)
         else:
             os.remove(file)
