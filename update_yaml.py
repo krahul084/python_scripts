@@ -92,8 +92,13 @@ def update_yaml_file(file_path, file_content_dict):
         print('{} updated!'.format(file_path))
 
 def determine_value_type(key_value, key_type='str'):
-    if (key_type == 'bool') and (key_value == 'True' or key_value == 'False'):
-        return bool(key_value)
+    if key_type == 'bool':
+        if key_value in ['true', 'True']:
+            return True
+        elif key_value in ['false', 'False']:
+            return False
+        else:
+            raise ValueError('Cannot convert {} to {}'.format(key_value, key_type))
     elif key_type == 'int':
         try:
             key_value = int(key_value)
@@ -123,6 +128,7 @@ def main():
     key_value_list = input_to_lst(args.key_path, key_value)
     dict_to_merge = gen_dict(key_value_list)
     file_content_dict = merge(file_content_dict, dict_to_merge)
+    print(file_content_dict)
     update_yaml_file(args.file_path, file_content_dict)
 
 # Execution Starts here
