@@ -128,7 +128,6 @@ def main():
     key_value_list = input_to_lst(args.key_path, key_value)
     dict_to_merge = gen_dict(key_value_list)
     file_content_dict = merge(file_content_dict, dict_to_merge)
-    print(file_content_dict)
     update_yaml_file(args.file_path, file_content_dict)
 
 # Execution Starts here
